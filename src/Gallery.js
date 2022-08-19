@@ -1,4 +1,12 @@
 import imagesMarkup from '../src/templates/markup.hbs';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+import axios from 'axios';
+
+let gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 export default class Gallery {
   static KEY = '29332963-764ea3ce314f104536083404e';
@@ -29,5 +37,6 @@ export default class Gallery {
 
   renderImages(images) {
     this.container.insertAdjacentHTML('beforeend', imagesMarkup(images));
+    gallery.refresh();
   }
 }

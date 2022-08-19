@@ -1,12 +1,7 @@
 import Notiflix from 'notiflix';
-import SimpleLightbox from 'simplelightbox';
 import classGallery from './Gallery';
-import 'simplelightbox/dist/simple-lightbox.min.css';
+import './style.css'
 
-let gallery = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
 
 const galleryMarkup = document.querySelector('.gallery');
 const btnLoadMore = document.querySelector('.load-more');
@@ -40,6 +35,7 @@ function onSerchPhoto(ev) {
         return;
       }
       Notiflix.Notify.success(`Hoorey! We found ${data.totalHits} Images`);
+
       galleryEl.renderImages(data.hits);
       if (page * 40 < data.totalHits) {
         btnLoadMore.style.display = 'block';
@@ -78,3 +74,5 @@ function onLoadMore() {
 function cleanListMarkup() {
   galleryMarkup.innerHTML = '';
 }
+
+
