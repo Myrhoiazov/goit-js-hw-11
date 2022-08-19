@@ -16,7 +16,7 @@ export default class Gallery {
     this.container = container;
   }
 
-  loadImages(query, page = 1) {
+  async loadImages(query, page = 1) {
     const options = new URLSearchParams({
       key: Gallery.KEY,
       q: query,
@@ -27,12 +27,11 @@ export default class Gallery {
       per_page: 40,
     });
 
-    return fetch(Gallery.BASE_URL + options).then(response => {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    });
+    const response = await axios.get(Gallery.BASE_URL + options);
+    if (response.statusText !== 'OK') {
+      throw new Error(response.status);
+    }
+    return response.data;
   }
 
   renderImages(images) {
