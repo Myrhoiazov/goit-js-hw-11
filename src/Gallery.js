@@ -23,14 +23,14 @@ export default class Gallery {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      page: page,
+      page,
       per_page: 40,
     });
 
     const response = await axios.get(Gallery.BASE_URL + options);
-    if (response.statusText !== 'OK') {
-      throw new Error(response.status);
-    }
+    // if (response.statusText !== 'OK') {
+    //   throw new Error(response.status);
+    // }
     return response.data;
   }
 
