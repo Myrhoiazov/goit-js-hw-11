@@ -36,6 +36,7 @@ async function onSerchPhoto(ev) {
     Notiflix.Notify.success(`Hoorey! We found ${data.totalHits} Images`);
 
     galleryEl.renderImages(data.hits);
+
     if (page * 40 < data.totalHits) {
       btnLoadMore.style.display = 'block';
     } else {
@@ -51,11 +52,13 @@ async function onSerchPhoto(ev) {
   }
 }
 
-function onLoadMore() {
+async function onLoadMore() {
   page += 1;
 
-  galleryEl.loadImages(value, page).then(data => {
+  const data = await galleryEl.loadImages(value, page)
+
     galleryEl.renderImages(data.hits);
+
     if (page * 40 < data.totalHits) {
       btnLoadMore.style.display = 'block';
     } else {
@@ -64,7 +67,6 @@ function onLoadMore() {
         "We're sorry, but you've reached the end of search results."
       );
     }
-  });
 }
 
 function cleanListMarkup() {
