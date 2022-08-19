@@ -15,7 +15,6 @@ const galleryEl = new classGallery(galleryMarkup);
 
 async function onSerchPhoto(ev) {
   ev.preventDefault();
-
   cleanListMarkup();
   btnLoadMore.style.display = 'none';
   value = ev.target.elements.searchQuery.value.trim();
@@ -26,6 +25,8 @@ async function onSerchPhoto(ev) {
 
   try {
     const data = await galleryEl.loadImages(value, page);
+
+    console.log(data.hits);
 
     if (data.hits.length == 0) {
       Notiflix.Notify.failure(
@@ -71,4 +72,5 @@ async function onLoadMore() {
 
 function cleanListMarkup() {
   galleryMarkup.innerHTML = '';
+  page = 1;
 }
