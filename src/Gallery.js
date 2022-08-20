@@ -27,11 +27,13 @@ export default class Gallery {
       per_page: 40,
     });
 
-    const response = await axios.get(Gallery.BASE_URL + options);
+    try {
+      const response = await axios.get(Gallery.BASE_URL + options);
+      return response.data;
+    } catch (error) {}
     // if (response.statusText !== 'OK') {
-    //   throw new Error(response.status);
+      throw new Error(response.status);
     // }
-    return response.data;
   }
 
   renderImages(images) {
